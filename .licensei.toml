@@ -1,0 +1,32 @@
+approved = [
+    "mit",
+    "apache-2.0",
+    "bsd-3-clause",
+    "bsd-2-clause",
+    "mpl-2.0",
+]
+
+ignored = [
+    "github.com/ghodss/yaml",
+
+    "github.com/inconshreveable/mousetrap", # Apache 2.0
+    "github.com/magiconair/properties", # BSD-3
+    "github.com/Masterminds/semver", # MIT
+    "github.com/Masterminds/sprig", # MIT
+    "github.com/davecgh/go-spew", # ISC license
+    "github.com/gogo/protobuf", # BSD
+    "github.com/russross/blackfriday/v2", # Simplified BSD
+
+    # Vanity URLS :\
+    "cloud.google.com/go",
+    "emperror.dev/errors",
+    "gopkg.in/square/go-jose.v2",
+    "go.opencensus.io",
+    "go.uber.org/atomic",
+    "go.uber.org/multierr",
+    "google.golang.org/api",
+    "google.golang.org/genproto",
+    "google.golang.org/grpc",
+    "sigs.k8s.io/yaml",
+    "sigs.k8s.io/structured-merge-diff/v3"
+]

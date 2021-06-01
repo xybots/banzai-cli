@@ -1,0 +1,63 @@
+builds:
+    -
+        main: ./cmd/banzai
+        binary: banzai
+        env:
+            - CGO_ENABLED=0
+        ldflags: "-s -w {{ .Env.GORELEASER_LDFLAGS }}"
+        goos:
+            - linux
+            - darwin
+        goarch:
+            - amd64
+
+archives:
+    -
+        name_template: "banzai_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+checksum:
+    name_template: "banzai_checksums.txt"
+
+changelog:
+    skip: true
+
+brews:
+    -
+        github:
+            owner: banzaicloud
+            name: homebrew-tap
+        folder: Formula
+        homepage: https://banzaicloud.com/
+        description: Command-line interface for Banzai Cloud Pipeline platform
+        test: |
+            system "#{bin}/banzai --version"
+        install: |
+            bin.install "banzai"
+
+            # Install bash completion
+            output = Utils.popen_read("#{bin}/banzai completion bash")
+            (bash_completion/"banzai").write output
+
+            # Install zsh completion
+            output = Utils.popen_read("#{bin}/banzai completion zsh")
+            (zsh_completion/"_banzai").write output
+        dependencies:
+            - kubectl
+
+nfpms:
+    -
+        vendor: Banzai Cloud
+        maintainer: Banzai Cloud <info@banzaicloud.com>
+        homepage: https://banzaicloud.com/
+        description: Command-line interface for Banzai Cloud Pipeline platform
+        formats:
+            - deb
+            - rpm
+        bindir: /usr/bin
+        license: Apache 2.0
+
+blob:
+    -
+        provider: s3
+        bucket: banzaicloud.com
+        folder: "downloads/banzai-cli/{{ .Version }}"
